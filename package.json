@@ -1,6 +1,6 @@
 {
   "name": "@rolemodel/client-theming",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Portable per-client branding: Brandfetch integration, brand registry, and contrast-aware MUI theme generation.",
   "license": "MIT",
   "author": "RoleModel Software",
@@ -60,6 +60,7 @@
   "devDependencies": {
     "@eslint/js": "^9",
     "@mui/material": "^7",
+    "@types/node": "^26.1.2",
     "@types/react": "^19",
     "eslint": "^9",
     "react": "^19",
