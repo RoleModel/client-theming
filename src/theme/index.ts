@@ -6,8 +6,10 @@
 
 export {
   DARK_THEME_SURFACE_COLOR,
+  LIGHT_THEME_SURFACE_COLOR,
   createBrandPaletteColor,
   createDarkThemeColors,
+  createLightThemeColors,
 } from "./brandPalette.js";
 export type {
   BrandColorScheme,

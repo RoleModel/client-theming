@@ -25,6 +25,7 @@ import { getBrandConfigByTicker } from "../brand/registry.js";
 import {
   createBrandPaletteColor,
   createDarkThemeColors,
+  createLightThemeColors,
 } from "./brandPalette.js";
 import { createClientChartPalette } from "./chartPalette.js";
 // Ensure the `tertiary` palette augmentation is part of this module graph.
@@ -102,8 +103,8 @@ export function resolveBrandColors(
 
 /**
  * Build a MUI {@link PaletteOptions} for one mode from resolved brand colors.
- * Dark palettes receive a minimal visibility adjustment against the dark canvas
- * while keeping already accessible client brand colors unchanged.
+ * Both palettes receive a minimal visibility adjustment against their own
+ * canvas, while keeping already accessible client brand colors unchanged.
  *
  * @param colors - Resolved brand colors.
  * @param mode - `"light"` or `"dark"`.
@@ -113,7 +114,13 @@ function buildClientPalette(
   colors: Required<BrandColors>,
   mode: PaletteMode
 ): PaletteOptions {
-  const schemeColors = mode === "dark" ? createDarkThemeColors(colors) : colors;
+  // Light mode used the raw brand color, so any brand that is light enough to
+  // wash out on white shipped exactly as supplied — 25 of 58 registered brands
+  // failed AA as text, 13 of them failed even the 3:1 non-text grade.
+  const schemeColors =
+    mode === "dark"
+      ? createDarkThemeColors(colors)
+      : createLightThemeColors(colors);
 
   return {
     mode,
